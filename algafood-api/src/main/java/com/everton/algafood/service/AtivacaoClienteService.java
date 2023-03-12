@@ -2,9 +2,7 @@ package com.everton.algafood.service;
 
 import com.everton.algafood.model.Cliente;
 import com.everton.algafood.notificacao.Notificador;
-import org.springframework.stereotype.Component;
 
-@Component
 public class AtivacaoClienteService {
 
 	private Notificador notificador;
