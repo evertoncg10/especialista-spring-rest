@@ -1,4 +1,4 @@
-package listener;
+package com.everton.algafood.listener;
 
 import com.everton.algafood.notificacao.NivelUrgencia;
 import com.everton.algafood.notificacao.Notificador;
