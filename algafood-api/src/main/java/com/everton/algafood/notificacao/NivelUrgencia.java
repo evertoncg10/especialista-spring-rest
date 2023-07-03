@@ -2,5 +2,5 @@ package com.everton.algafood.notificacao;
 
 public enum NivelUrgencia {
     URGENTE,
-    NAO_URGENTE
+    SEM_URGENCIA
 }
