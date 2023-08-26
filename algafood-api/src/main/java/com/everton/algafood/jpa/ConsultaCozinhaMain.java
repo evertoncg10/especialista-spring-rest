@@ -2,6 +2,7 @@ package com.everton.algafood.jpa;
 
 import com.everton.algafood.AlgafoodApiApplication;
 import com.everton.algafood.domain.model.Cozinha;
+import com.everton.algafood.domain.repository.CozinhaRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
@@ -14,8 +15,8 @@ public class ConsultaCozinhaMain {
                 .web(WebApplicationType.NONE)
                 .run(args);
 
-        CadastroCozinha cadastroCozinha = applicationContext.getBean(CadastroCozinha.class);
-        List<Cozinha> cozinhas = cadastroCozinha.listar();
+        CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+        List<Cozinha> cozinhas = cozinhaRepository.listar();
 
         cozinhas.forEach(cozinha -> System.out.println(cozinha.getNome()));
     }
