@@ -1,8 +1,6 @@
 package com.everton.algafood.api.controller;
 
-import com.everton.algafood.domain.model.Cozinha;
 import com.everton.algafood.domain.model.Estado;
-import com.everton.algafood.domain.repository.CozinhaRepository;
 import com.everton.algafood.domain.repository.EstadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
