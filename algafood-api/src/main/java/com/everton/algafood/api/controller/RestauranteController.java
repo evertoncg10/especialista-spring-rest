@@ -1,7 +1,6 @@
 package com.everton.algafood.api.controller;
 
 import com.everton.algafood.domain.exception.EntidadeNaoEncontradaException;
-import com.everton.algafood.domain.model.Cozinha;
 import com.everton.algafood.domain.model.Restaurante;
 import com.everton.algafood.domain.repository.RestauranteRepository;
 import com.everton.algafood.domain.service.CadastroRestauranteService;
