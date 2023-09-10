@@ -3,14 +3,14 @@ package com.everton.algafood.infrastructure.repository;
 import com.everton.algafood.domain.model.Estado;
 import com.everton.algafood.domain.repository.EstadoRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Component
+@Repository
 public class EstadoRepositoryImpl implements EstadoRepository {
 
 	@PersistenceContext

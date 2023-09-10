@@ -2,14 +2,14 @@ package com.everton.algafood.infrastructure.repository;
 
 import com.everton.algafood.domain.model.Cidade;
 import com.everton.algafood.domain.repository.CidadeRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Component
+@Repository
 public class CidadeRepositoryImpl implements CidadeRepository {
 
 	@PersistenceContext
@@ -34,7 +34,7 @@ public class CidadeRepositoryImpl implements CidadeRepository {
 	
 	@Transactional
 	@Override
-	public void remover(Long cidadeId) {
+	public void remover(Long cidadeId) throws IllegalArgumentException{
 		Cidade cidade = buscar(cidadeId);
 		manager.remove(cidade);
 	}
