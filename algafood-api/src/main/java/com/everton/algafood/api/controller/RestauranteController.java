@@ -72,7 +72,7 @@ public class RestauranteController {
                                               @RequestBody Map<String, Object> campos) {
         var restauranteAtualOptional = restauranteRepository.findById(restauranteId);
 
-        if (!restauranteAtualOptional.isPresent()) {
+        if (restauranteAtualOptional.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         Restaurante restauranteAtual = restauranteAtualOptional.get();

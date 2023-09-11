@@ -26,8 +26,7 @@ public class CadastroCidadeService {
     }
 
     public Cidade buscar(Long cidadeId) {
-        Cidade cidade = cidadeRepository.findById(cidadeId).orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Não existe um cadastro de cidade com o código %d", cidadeId)));
-        return cidade;
+        return cidadeRepository.findById(cidadeId).orElseThrow(() -> new EntidadeNaoEncontradaException(String.format("Não existe um cadastro de cidade com o código %d", cidadeId)));
     }
 
     public void excluir(Long cidadeId) {

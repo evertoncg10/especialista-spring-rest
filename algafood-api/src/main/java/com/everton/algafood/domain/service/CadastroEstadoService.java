@@ -20,11 +20,10 @@ public class CadastroEstadoService {
     }
 
     public Estado buscar(Long estadoId) {
-        Estado estado = estadoRepository.findById(estadoId)
+        return estadoRepository.findById(estadoId)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException(
                         String.format("Não existe um cadastro de estado com o código %d", estadoId)
                 ));
-        return estado;
     }
 
     public void excluir(Long estadoId) {
