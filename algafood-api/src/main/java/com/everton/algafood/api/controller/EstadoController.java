@@ -25,7 +25,7 @@ public class EstadoController {
 
     @GetMapping
     public List<Estado> listar() {
-        return estadoRepository.listar();
+        return estadoRepository.findAll();
     }
 
     @GetMapping("/{estadoId}")
@@ -41,13 +41,14 @@ public class EstadoController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> adicionar(@RequestBody Estado estado) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(estadoRepository.salvar(estado));
+        return ResponseEntity.status(HttpStatus.CREATED).body(estadoRepository.save(estado));
     }
 
     @PutMapping("/{estadoId}")
     public ResponseEntity<Estado> atualizar(@PathVariable Long estadoId, @RequestBody Estado estado) {
-        Estado estadoAtual = estadoRepository.buscar(estadoId);
-        if (estadoAtual != null) {
+        var estadoAtualOptinal = estadoRepository.findById(estadoId);
+        if (estadoAtualOptinal.isPresent()) {
+            Estado estadoAtual = estadoAtualOptinal.get();
             BeanUtils.copyProperties(estado, estadoAtual, "id");
             cadastroEstado.salvar(estadoAtual);
             return ResponseEntity.ok(estadoAtual);

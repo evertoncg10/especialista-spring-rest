@@ -16,22 +16,20 @@ public class CadastroEstadoService {
     private EstadoRepository estadoRepository;
 
     public Estado salvar(Estado estado) {
-        return estadoRepository.salvar(estado);
+        return estadoRepository.save(estado);
     }
 
     public Estado buscar(Long estadoId) {
-        Estado estado = estadoRepository.buscar(estadoId);
-        if (estado == null) {
-            throw new EntidadeNaoEncontradaException(
-                    String.format("Não existe um cadastro de estado com o código %d", estadoId)
-            );
-        }
+        Estado estado = estadoRepository.findById(estadoId)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(
+                        String.format("Não existe um cadastro de estado com o código %d", estadoId)
+                ));
         return estado;
     }
 
     public void excluir(Long estadoId) {
         try {
-            estadoRepository.remover(estadoId);
+            estadoRepository.deleteById(estadoId);
 
         } catch (DataIntegrityViolationException e) {
             throw new EntidadeEmUsoException(

@@ -28,14 +28,14 @@ public class RestauranteController {
 
     @GetMapping
     public List<Restaurante> listar() {
-        return restauranteRepository.listar();
+        return restauranteRepository.findAll();
     }
 
     @GetMapping("/{restauranteId}")
     public ResponseEntity<Restaurante> buscar(@PathVariable Long restauranteId) {
-        var restaurante = restauranteRepository.buscar(restauranteId);
-        if (restaurante != null) {
-            return ResponseEntity.ok(restaurante);
+        var restauranteOptional = restauranteRepository.findById(restauranteId);
+        if (restauranteOptional.isPresent()) {
+            return ResponseEntity.ok(restauranteOptional.get());
         }
         return ResponseEntity.notFound().build();
     }
@@ -54,8 +54,9 @@ public class RestauranteController {
     @PutMapping("/{restauranteId}")
     public ResponseEntity<?> atualizar(@PathVariable Long restauranteId, @RequestBody Restaurante restaurante) {
         try {
-            Restaurante restauranteAtual = restauranteRepository.buscar(restauranteId);
-            if (restauranteAtual != null) {
+            var restauranteAtualOptional = restauranteRepository.findById(restauranteId);
+            if (restauranteAtualOptional.isPresent()) {
+                Restaurante restauranteAtual = restauranteAtualOptional.get();
                 BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
                 Restaurante restauranteEditado = cadastroRestaurante.salvar(restauranteAtual);
                 return ResponseEntity.ok(restauranteEditado);
@@ -69,12 +70,12 @@ public class RestauranteController {
     @PatchMapping("/{restauranteId}")
     public ResponseEntity<?> atualizarParcial(@PathVariable Long restauranteId,
                                               @RequestBody Map<String, Object> campos) {
-        Restaurante restauranteAtual = restauranteRepository.buscar(restauranteId);
+        var restauranteAtualOptional = restauranteRepository.findById(restauranteId);
 
-        if (restauranteAtual == null) {
+        if (!restauranteAtualOptional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-
+        Restaurante restauranteAtual = restauranteAtualOptional.get();
         merge(campos, restauranteAtual);
 
         return atualizar(restauranteId, restauranteAtual);
