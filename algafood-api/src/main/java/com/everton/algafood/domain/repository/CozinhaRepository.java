@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface CozinhaRepository extends JpaRepository<Cozinha, Long> {
     List<Cozinha> findCozinhasByNomeContaining(String nome);
     Optional<Cozinha> findByNome(String nome);
+    boolean existsByNome(String nome);
 }
