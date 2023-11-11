@@ -13,9 +13,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-import static com.everton.algafood.infrastructure.repository.spec.RestauranteSpecs.comFreteGratis;
-import static com.everton.algafood.infrastructure.repository.spec.RestauranteSpecs.comNomeSemelhante;
-
 @RestController
 @RequestMapping("/teste")
 public class TesteController {
@@ -46,6 +43,12 @@ public class TesteController {
         return restauranteRepository.queryByTaxaFreteBetween(taxaInicial, taxaFinal);
     }
 
+    @GetMapping("/cozinhas/primeiro")
+    public Optional<Cozinha> listarPrimeiro() {
+        Optional<Cozinha> cozinha = cozinhaRepository.buscarPrimeiro();
+        return cozinha;
+    }
+
     @GetMapping("/restaurantes/por-nome")
     public List<Restaurante> restaurantesPorNomeECozinhaId(String nome, Long cozinhaId) {
         return restauranteRepository.consultaPorNome(nome, cozinhaId);
@@ -74,5 +77,10 @@ public class TesteController {
     @GetMapping("/restaurantes/com-frete-gratis")
     public List<Restaurante> restaurantesComFreteGratis(String nome) {
         return restauranteRepository.findComFreteGratis(nome);
+    }
+
+    @GetMapping("/restaurantes/primeiro")
+    public Optional<Restaurante> restaurantePrimeiro() {
+        return restauranteRepository.buscarPrimeiro();
     }
 }
